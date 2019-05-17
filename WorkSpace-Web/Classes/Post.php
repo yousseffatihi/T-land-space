@@ -1,7 +1,6 @@
 <?php
 require_once(realpath(dirname(__FILE__)) . '/Administrateur.php');
 
-use Administrateur;
 
 /**
  * @access public

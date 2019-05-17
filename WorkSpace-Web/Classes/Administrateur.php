@@ -2,8 +2,6 @@
 require_once(realpath(dirname(__FILE__)) . '/Post.php');
 require_once(realpath(dirname(__FILE__)) . '/Person.php');
 
-use Post;
-use Person;
 
 /**
  * @access public
@@ -15,6 +13,20 @@ class Administrateur extends Person {
 	 * @AssociationMultiplicity 0..*
 	 */
 	public $_manage = array();
+
+	/**
+	 * @access public
+	 */
+
+	 public function __construct(){
+
+	 }
+
+	 public function showArray(){
+		 foreach ($this->_manage as $key => $value) {
+			 echo "Value : " . $value;
+		 }
+	 }
 
 	/**
 	 * @access public
