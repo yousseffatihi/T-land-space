@@ -242,7 +242,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px;
+    padding: 10px;
     min-height: 100%;
 }
 

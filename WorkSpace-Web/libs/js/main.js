@@ -1,4 +1,4 @@
-//Send Data From Register & Get Data From Another Php Page 
+//Send Data From Register & Get Data From Another Php Page
 $(document).ready(function() {
     $('#loginform').submit(function(e) {
         e.preventDefault();
