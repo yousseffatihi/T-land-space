@@ -11,18 +11,18 @@
 <body>
   <!-- NavBar -->
   <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container"> <a class="navbar-brand text-primary" href="#">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i>
-        <b> BRAND</b>
-      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
+    <div class="container"> <a class="navbar-brand text-primary" href="./">
+      <img src="../libs/images/TLand@0,1x.png" width="100" alt="T Land Space">
+      </a>
+      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar4">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">My Reservation</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Events</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Profile</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="./">Home</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Reservations.php">My Reservation</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Events.php">Events</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Profile.php">Profile</a> </li>
         </ul>
       </div>
     </div>
@@ -34,16 +34,16 @@
           <div class="col-md-3">
             <ul class="list-group">
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-user-circle fa-lg"></i> <span class="ml-2">Profile</span> </a>
+                <a href="Profile.php"><i class="fas fa-user-circle fa-lg"></i> <span class="ml-2">Profile</span> </a>
               </li>
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-lock fa-lg"></i> <span class="ml-2">Password</span> </a>
+                <a href="Password.php"><i class="fas fa-lock fa-lg"></i> <span class="ml-2">Password</span> </a>
               </li>
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-handshake fa-lg"></i> <span class="ml-2">Events</span> </a>
+                <a href="Events.php"><i class="fas fa-handshake fa-lg"></i> <span class="ml-2">Events</span> </a>
               </li>
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-calendar fa-lg"></i> <span class="ml-2">My Reservations</span> </a>
+                <a href="Reservations.php"><i class="fas fa-calendar fa-lg"></i> <span class="ml-2">My Reservations</span> </a>
               </li>
             </ul>
           </div>

@@ -11,10 +11,11 @@
 
 <body>
   <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container"> <a class="navbar-brand text-primary" href="#">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i>
-        <b> BRAND</b>
-      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
+    <div class="container">
+      <a class="navbar-brand text-primary" href="./">
+        <img src="../libs/images/TLand@0,1x.png" width="100" alt="T Land Space">
+      </a>
+      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar4">
@@ -108,7 +109,7 @@
       </div>
       <div class="row">
         <div class="col-md-4 p-3">
-          <div class="card text-center text-dark">
+          <div class="card cardPrice text-center text-dark">
             <div class="card-body p-4">
               <h3>Day</h3>
               <p class="my-3">Among the tall grass by the trickling stream.</p>
@@ -117,7 +118,7 @@
           </div>
         </div>
         <div class="col-md-4 p-3">
-          <div class="card text-center text-dark">
+          <div class="card cardPrice text-center text-dark">
             <div class="card-body p-4">
               <h3>Week</h3>
               <p class="my-3">I am alone, and feel the charm of existence in this spot.</p>
@@ -126,7 +127,7 @@
           </div>
         </div>
         <div class="col-md-4 p-3">
-          <div class="card text-center text-dark">
+          <div class="card cardPrice text-center text-dark">
             <div class="card-body p-4">
               <h3>Month</h3>
               <p class="my-3">The breath of that universal love which bears and sustains us.</p>

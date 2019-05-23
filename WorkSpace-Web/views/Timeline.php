@@ -8,22 +8,21 @@
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
   <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
   <!-- NavBar -->
   <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container"> <a class="navbar-brand text-primary" href="#">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i>
-        <b> BRAND</b>
-      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
+    <div class="container"> <a class="navbar-brand text-primary" href="./">
+      <img src="../libs/images/TLand@0,1x.png" width="100" alt="T Land Space">
+      </a>
+      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar4">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">My Reservation</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Events</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Profile</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="./">Home</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Reservations.php">My Reservation</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Events.php">Events</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Profile.php">Profile</a> </li>
         </ul>
       </div>
     </div>

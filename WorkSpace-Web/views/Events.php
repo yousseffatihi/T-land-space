@@ -7,78 +7,22 @@
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
   <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
-  <style media="screen">
-  .recentPost{
-    white-space: normal;
-    height: 70px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .datePost{
-    align-items: baseline;
-  }
-
-  .postTitle{
-    white-space: nowrap;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .postContent{
-
-  }
-
-  .imgComment{
-    max-width: 96px;
-  }
-
-  .txtComment{
-    width: 100% !important;
-  }
-
-  .btnComment{
-        margin-left: auto;
-  }
-
-  .list-group-item{
-    border: none;
-  }
-
-  hr{
-        border-top: 1px dashed rgba(0, 0, 0, 0.1);
-  }
-
-  a{
-    text-decoration: none !important;
-  }
-
-  .btnPrice{
-    margin: auto;
-width: 100%;
-position: absolute;
-top: 0;
-left: 0;
-  }
-  </style>
 </head>
 
 <body>
   <!-- NavBar -->
   <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container"> <a class="navbar-brand text-primary" href="#">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i>
-        <b> BRAND</b>
+    <div class="container"> <a class="navbar-brand text-primary" href="./">
+        <img src="../libs/images/TLand@0,1x.png" width="100" alt="T Land Space">
       </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar4">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Home</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">My Reservation</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Events</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Profile</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="./">Home</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Reservations.php">My Reservation</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Events.php">Events</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="Profile.php">Profile</a> </li>
         </ul>
       </div>
     </div>
@@ -90,16 +34,16 @@ left: 0;
           <div class="col-md-3">
             <ul class="list-group">
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-user-circle fa-lg"></i> <span class="ml-2">Profile</span> </a>
+                <a href="Profile.php"><i class="fas fa-user-circle fa-lg"></i> <span class="ml-2">Profile</span> </a>
               </li>
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-lock fa-lg"></i> <span class="ml-2">Password</span> </a>
+                <a href="Password.php"><i class="fas fa-lock fa-lg"></i> <span class="ml-2">Password</span> </a>
               </li>
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-handshake fa-lg"></i> <span class="ml-2">Events</span> </a>
+                <a href="Ecents.php"><i class="fas fa-handshake fa-lg"></i> <span class="ml-2">Events</span> </a>
               </li>
               <li class=" border-0 list-group-item d-flex justify-content-between align-items-center">
-                <a href="#"><i class="fas fa-calendar fa-lg"></i> <span class="ml-2">My Reservations</span> </a>
+                <a href="Reservations.php"><i class="fas fa-calendar fa-lg"></i> <span class="ml-2">My Reservations</span> </a>
               </li>
             </ul>
           </div>
