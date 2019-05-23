@@ -3,37 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../libs/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../libs/css/all.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
   <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
-  <style media="screen">
-  .recentPost{
-    white-space: normal;
-    height: 70px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .datePost{
-    align-items: baseline;
-  }
-
-  .postTitle{
-    white-space: nowrap;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .postContent{
-
-  }
-
-  .list-group-item{
-    border: none;
-  }
-  </style>
 </head>
 
 <body>

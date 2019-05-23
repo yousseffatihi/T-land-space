@@ -3,71 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../libs/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../libs/css/all.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
   <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
-  <style media="screen">
-    .heroscene{
-      background-image: url('../libs/images/workspace-collaboration.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 700px;
-    }
-
-    .bgclient {
-        width: 100px;
-        margin: auto;
-        height: 100px;
-        background-image: url('../libs/images/boy1.jpeg');
-        background-position: center;
-        background-size: cover;
-        border-radius: 50%;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .datepicker-inline .datepicker {
-      width: 300px;
-      height: 300px;
-    }
-
-    .card {
-      border: none;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .btnLogin {
-      color: white !important;
-    }
-
-    @media (max-width: 767px) {
-      .btnLogin{
-        width: 100%;
-      }
-      .btnRegister {
-        width: 100%;
-      }
-      .navForm{
-            display: block;
-      }
-      .navInput {
-            width: 100% !important;
-
-      }
-    }
-    @media (min-width: 766px) {
-      .btnLogin{
-        margin-left: 5px;
-      }
-      .btnRegister {
-margin-left: 5px;
-      }
-      .navInput {
-        margin-left: 5px;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -85,8 +24,8 @@ margin-left: 5px;
           <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
           <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li> -->
         <form method="post" class="navForm form-inline my-2 my-lg-0">
-          <li class="nav-item navInput" style="margin-top:5px;" > <input class="form-control navInput" type="Email" name="txtEmail" placeholder="Email@example.com"> </li>
-          <li class="nav-item  navInput" style="margin-top:5px;" > <input class="form-control navInput" type="Password" name="txtPassword" placeholder="Password"> </li>
+          <li class="nav-item navInput" style="margin-top:5px;" > <input class="form-control navInput inputsForm" style="margin:0;" type="Email" name="txtEmail" placeholder="Email@example.com"> </li>
+          <li class="nav-item  navInput" style="margin-top:5px;" > <input class="form-control navInput inputsForm" style="margin:0;" type="Password" name="txtPassword" placeholder="Password"> </li>
           <li class="nav-item"style="margin-top:5px;"><button type="submit" class="btn btn-primary btnLogin" style="width: 100%;">Login</button></li>
           <li class="nav-item"style="margin-top:5px;"><a class="btn navbar-btn ml-md-2 btn-light btnRegister" href="./Register.php">Register</a></li>
         </form>
@@ -95,30 +34,32 @@ margin-left: 5px;
     </div>
   </nav>
   <!-- Hero Scene -->
-  <div class="text-white">
+  <div class="">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-6 p-0 heroscene">
+        <div class="col-md-6 heroscene">
+
         </div>
-        <div class="p-5 col-lg-6 d-flex flex-column justify-content-center">
+        <div class="py-5 col-md-6 justify-content-center d-flex flex-column">
           <div class="container">
             <div class="row">
               <div class="datepicker-here" style="margin: auto;" id="my-element" data-date-format="dd-mm-yyyy" data-language='en'></div>
-            </div>
-            <div class="p-3 row">
-              <div class="col-md-12" style="text-align: center;">
-                <div class="btn-group">
-                  <a id="btnMin" class="btn btn-primary" style="border-radius: 3px;">-</a>
-                  <a id="btnValue" class="btn btn-disable" style="width: 100px; cursor: default; color: black;">1</a>
-                  <a id="btnAdd" class="btn btn-primary" style="border-radius: 3px;">+</a>
-                </div>
+          </div>
+          <div class="p-3 row">
+            <div class="col-md-12" style="text-align: center;">
+              <div class="btn-group">
+                <a id="btnMin" class="btn btn-primary" style="border-radius: 3px;">-</a>
+                <a id="btnValue" class="btn btn-disable" style="width: 100px; cursor: default; color: black;">1</a>
+                <a id="btnAdd" class="btn btn-primary" style="border-radius: 3px;">+</a>
               </div>
             </div>
-            <div class="row">
-              <a id="btnApply" class="btn btn-primary" style="width: 170px; margin: auto;">Apply</a>
-            </div>
+          </div>
+          <div class="row">
+            <a id="btnApply" class="btn btn-primary" style="width: 170px; margin: auto;">Apply</a>
           </div>
         </div>
       </div>
+    </div>
   </div>
   <!-- End Hero Scene -->
   <!-- Testimonials -->
@@ -210,17 +151,17 @@ margin-left: 5px;
         <div class="p-0 order-2 order-md-1 col-lg-6">
           <iframe width="100%" height="350" src="https://maps.google.com/maps?hl=en&amp;q=New%20York&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" scrolling="no" frameborder="0"></iframe>
         </div>
-        <div class="px-4 order-1 order-md-2 col-lg-6">
+        <div class="p-4 order-1 order-md-2 col-lg-6">
           <h2 class="mb-4">A greater artist</h2>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control" id="form44" placeholder="Name">
+              <input type="text" class="form-control inputsForm" id="form44" placeholder="Name">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" id="form45" placeholder="Email">
+              <input type="email" class="form-control inputsForm" id="form45" placeholder="Email">
             </div>
             <div class="form-group">
-              <textarea class="form-control" id="form46" rows="3" placeholder="Your message"></textarea>
+              <textarea class="form-control inputsForm" id="form46" rows="3" placeholder="Your message"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">Send</button>
           </form>

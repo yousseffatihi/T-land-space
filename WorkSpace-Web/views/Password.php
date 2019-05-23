@@ -6,54 +6,6 @@
   <link rel="stylesheet" href="../libs/css/all.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
-  <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
-  <style media="screen">
-  .recentPost{
-    white-space: normal;
-    height: 70px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .datePost{
-    align-items: baseline;
-  }
-
-  .postTitle{
-    white-space: nowrap;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .postContent{
-
-  }
-
-  .imgComment{
-    max-width: 96px;
-  }
-
-  .txtComment{
-    width: 100% !important;
-  }
-
-  .btnComment{
-        margin-left: auto;
-  }
-
-  .list-group-item{
-    border: none;
-  }
-
-  hr{
-        border-top: 1px dashed rgba(0, 0, 0, 0.1);
-  }
-
-  a{
-    text-decoration: none !important;
-  }
-  </style>
 </head>
 
 <body>
@@ -96,72 +48,37 @@
             </ul>
           </div>
           <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-3" style="">
-                <img class="img-fluid d-block rounded-circle mx-auto p-4" src="https://static.pingendo.com/img-placeholder-3.svg">
-                <a class="btn btn-outline-primary btn-block my-2" href="#">Outline</a>
-              </div>
-              <div class="col-md-9" style="">
+          <form method="post">
+            <div class="card">
+              <div class="card-body">
                 <div class="row">
-                  <div class="col-md-6 mt-2">
-                    <h6>First Name</h6>
+                  <div class="col-md-12">
+                    <h5 class="card-title"><b>Old Password</b></h5>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+                      <input type="password" class="form-control inputsForm" id="oldPassword" name="oldPassword" placeholder="Enter Your Old Password">
                     </div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <h6>Last Name</h6>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <h6>Email</h6>
-                    <div class="form-group">
-                      <input type="email" class="form-control" id="txtEmail" name="Email" placeholder="E-mail">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <h6>Phone Number</h6>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number">
-                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6 mt-2">
-                    <h6>Birthday</h6>
+                  <div class="col-md-6">
+                    <h5 class="card-title"><b>New Password</b></h5>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="dd-MM-yyyy">
+                      <input type="password" class="form-control inputsForm" id="newPassword" name="newPassword" placeholder="Enter Your New Password">
+                    </div>                  </div>
+                  <div class="col-md-6">
+                    <h5 class="card-title"><b>Confirm Password</b></h5>
+                    <div class="form-group">
+                      <input type="password" class="form-control inputsForm" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
                     </div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <h6>Country</h6>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="country" name="country" placeholder="Country"> </div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <h6>City</h6>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="city" name="city" placeholder="City"> </div>
-                  </div>
-                  <div class="col-md-6 mt-2">
-                    <h6>Gender</h6>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="gender" name="gender" placeholder="Gender"> </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-6 mt-2">
-
-                  </div>
-                  <div class="col-md-6 mt-2">
-
-                  </div>
+                  <div class="col-md-12"><a class="btn btn-primary btn-block" href="#">Apply</a></div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
+        </div>
         </div>
       </div>
     </div>
@@ -206,9 +123,6 @@
   <script src="../libs/js/jquery.min.js"></script>
   <script src="../libs/js/popper.min.js"></script>
   <script src="../libs/js/bootstrap.min.js"></script>
-  <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
-  <script src="../libs/js/datepicker.min.js"></script>
-  <script src="../libs/js/i18n/datepicker.en.js"></script>
 </body>
 
 </html>
