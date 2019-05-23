@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `Administrator`;
 CREATE TABLE `Administrator` (
-  `idAdministrator` int(10) NOT NULL AUTO_INCREMENT,
+  `idAdministrator` int(10) NOT NULL,
   `FirstName` varchar(50) DEFAULT NULL,
   `LastName` varchar(50) DEFAULT NULL,
   `Birthday` date DEFAULT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `Administrator` (
   `Password` varchar(50) DEFAULT NULL,
   `Address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idAdministrator`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of Administrator
@@ -44,15 +44,15 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `Client`;
 CREATE TABLE `Client` (
-  `IdClient` int(10) NOT NULL AUTO_INCREMENT,
+  `idClient` int(10) NOT NULL,
   `FirstName` varchar(50) DEFAULT NULL,
   `LastName` varchar(50) DEFAULT NULL,
   `Birthday` date DEFAULT NULL,
   `Email` varchar(100) DEFAULT NULL,
   `Password` varchar(50) DEFAULT NULL,
   `Address` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IdClient`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`idClient`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of Client
@@ -67,16 +67,17 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `ClientReservation`;
 CREATE TABLE `ClientReservation` (
-  `IdClient` int(10) NOT NULL,
-  `IdWorkSpace` int(10) NOT NULL,
+  `idClient` int(10) NOT NULL,
+  `idWorkspace` int(10) NOT NULL,
   `DateReservation` date NOT NULL,
   `NumberOfPlaces` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdClient`,`IdWorkSpace`,`DateReservation`) USING BTREE,
-  KEY `FKClientRese325255` (`IdClient`),
-  KEY `FKClientRese593027` (`IdWorkSpace`),
+  `status` nvarchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idClient`,`idWorkspace`,`DateReservation`) USING BTREE,
+  KEY `FKClientRese325255` (`idClient`),
+  KEY `FKClientRese593027` (`idWorkspace`),
   KEY `PKCleintReservationDate` (`DateReservation`) USING BTREE,
-  CONSTRAINT `FKClientRese325255` FOREIGN KEY (`IdClient`) REFERENCES `Client` (`IdClient`),
-  CONSTRAINT `FKClientRese593027` FOREIGN KEY (`IdWorkSpace`) REFERENCES `WorkSpace` (`IdWorkSpace`)
+  CONSTRAINT `FKClientRese325255` FOREIGN KEY (`idClient`) REFERENCES `Client` (`idClient`),
+  CONSTRAINT `FKClientRese593027` FOREIGN KEY (`idWorkspace`) REFERENCES `Workspace` (`idWorkspace`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -96,7 +97,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `Event`;
 CREATE TABLE `Event` (
-  `IdEvent` int(10) NOT NULL AUTO_INCREMENT,
+  `idEvent` int(10) NOT NULL,
   `NameEvent` varchar(200) DEFAULT NULL,
   `TextEvent` text,
   `Image` blob,
@@ -105,10 +106,10 @@ CREATE TABLE `Event` (
   `DateEvent` date DEFAULT NULL,
   `DateExpiration` date DEFAULT NULL,
   `idAdministrator` int(10) NOT NULL,
-  PRIMARY KEY (`IdEvent`),
+  PRIMARY KEY (`idEvent`),
   KEY `FKEvent325276` (`idAdministrator`),
   CONSTRAINT `FKEvent325276` FOREIGN KEY (`idAdministrator`) REFERENCES `Administrator` (`idAdministrator`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of Event
@@ -123,14 +124,14 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `Organisation`;
 CREATE TABLE `Organisation` (
-  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `ID` int(10) NOT NULL,
   `NameOrganisation` varchar(50) DEFAULT NULL,
   `Responsible` varchar(50) DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `Password` varchar(50) DEFAULT NULL,
   `DateOrganisation` date DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of Organisation
@@ -145,14 +146,15 @@ COMMIT;
 DROP TABLE IF EXISTS `OrganisationReservation`;
 CREATE TABLE `OrganisationReservation` (
   `OrganisationID` int(10) NOT NULL,
-  `IdWorkSpace` int(10) NOT NULL,
+  `idWorkspace` int(10) NOT NULL,
   `DateReservation` date NOT NULL,
   `NumberOfPlaces` int(11) DEFAULT NULL,
-  PRIMARY KEY (`OrganisationID`,`IdWorkSpace`,`DateReservation`) USING BTREE,
+  `status` nvarchar(20) DEFAULT NULL,
+  PRIMARY KEY (`OrganisationID`,`idWorkspace`,`DateReservation`) USING BTREE,
   KEY `FKOrganisati932384` (`OrganisationID`),
-  KEY `FKOrganisati912134` (`IdWorkSpace`),
+  KEY `FKOrganisati912134` (`idWorkspace`),
   KEY `PKDateOrganisationReservation` (`DateReservation`) USING BTREE,
-  CONSTRAINT `FKOrganisati912134` FOREIGN KEY (`IdWorkSpace`) REFERENCES `WorkSpace` (`IdWorkSpace`),
+  CONSTRAINT `FKOrganisati912134` FOREIGN KEY (`idWorkspace`) REFERENCES `Workspace` (`idWorkspace`),
   CONSTRAINT `FKOrganisati932384` FOREIGN KEY (`OrganisationID`) REFERENCES `Organisation` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -160,8 +162,8 @@ CREATE TABLE `OrganisationReservation` (
 -- Records of OrganisationReservation
 -- ----------------------------
 BEGIN;
-INSERT INTO `OrganisationReservation` VALUES (1, 1, '2019-05-26', 20);
-INSERT INTO `OrganisationReservation` VALUES (1, 1, '2019-06-01', 20);
+INSERT INTO `OrganisationReservation` VALUES (1, 1, '2019-05-26', 20,'Pending');
+INSERT INTO `OrganisationReservation` VALUES (1, 1, '2019-06-01', 20,'Pending');
 COMMIT;
 
 -- ----------------------------
@@ -169,17 +171,17 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `Post`;
 CREATE TABLE `Post` (
-  `IdPost` int(10) NOT NULL AUTO_INCREMENT,
+  `idPost` int(10) NOT NULL,
   `NamePost` varchar(50) DEFAULT NULL,
   `TextPost` text,
   `Image` blob,
   `DatePost` date DEFAULT NULL,
   `File` blob,
   `idAdministrator` int(10) NOT NULL,
-  PRIMARY KEY (`IdPost`),
+  PRIMARY KEY (`idPost`),
   KEY `FKPost479969` (`idAdministrator`),
   CONSTRAINT `FKPost479969` FOREIGN KEY (`idAdministrator`) REFERENCES `Administrator` (`idAdministrator`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of Post
@@ -194,7 +196,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `Promotion`;
 CREATE TABLE `Promotion` (
-  `IdPromotion` int(10) NOT NULL AUTO_INCREMENT,
+  `idPromotion` int(10) NOT NULL,
   `NamePromotion` varchar(200) DEFAULT NULL,
   `TextPromotion` text,
   `Image` blob,
@@ -202,10 +204,10 @@ CREATE TABLE `Promotion` (
   `DatePromotion` date DEFAULT NULL,
   `DateExpiration` date DEFAULT NULL,
   `idAdministrator` int(10) NOT NULL,
-  PRIMARY KEY (`IdPromotion`),
+  PRIMARY KEY (`idPromotion`),
   KEY `FKPromotion228464` (`idAdministrator`),
   CONSTRAINT `FKPromotion228464` FOREIGN KEY (`idAdministrator`) REFERENCES `Administrator` (`idAdministrator`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of Promotion
