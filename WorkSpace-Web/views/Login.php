@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T Land Space</title>
+    <title>T Land Space | Login</title>
     <link rel="stylesheet" type="text/css" href="../libs/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../libs/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="../libs/css/iofrm-style.css">
     <link rel="stylesheet" type="text/css" href="../libs/css/iofrm-theme3.css">
-    <style media="screen">
+    <link rel="icon" href="../libs/images/T@0,1x.png">
+  <style media="screen">
       .website-logo img {
         width: 300px;
       }

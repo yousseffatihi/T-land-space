@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T Land Space | My Reservations</title>
   <link rel="stylesheet" href="../libs/css/all.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
-  <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="../libs/images/T@0,1x.png">
 </head>
 
 <body>
