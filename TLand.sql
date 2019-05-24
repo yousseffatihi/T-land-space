@@ -18,6 +18,25 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for WorkSpace
+-- ----------------------------
+DROP TABLE IF EXISTS `WorkSpace`;
+CREATE TABLE `WorkSpace` (
+  `IdWorkSpace` int(10) NOT NULL AUTO_INCREMENT,
+  `City` varchar(50) DEFAULT NULL,
+  `Capacity` int(10) DEFAULT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`IdWorkSpace`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of WorkSpace
+-- ----------------------------
+BEGIN;
+INSERT INTO `WorkSpace` VALUES (1, 'Kenitra', 30, 'Center Ville St Lyote');
+COMMIT;
+
+-- ----------------------------
 -- Table structure for Administrator
 -- ----------------------------
 DROP TABLE IF EXISTS `Administrator`;
@@ -73,9 +92,6 @@ CREATE TABLE `ClientReservation` (
   `NumberOfPlaces` int(11) DEFAULT NULL,
   `status` nvarchar(20) DEFAULT NULL,
   PRIMARY KEY (`idClient`,`idWorkspace`,`DateReservation`) USING BTREE,
-  KEY `FKClientRese325255` (`idClient`),
-  KEY `FKClientRese593027` (`idWorkspace`),
-  KEY `PKCleintReservationDate` (`DateReservation`) USING BTREE,
   CONSTRAINT `FKClientRese325255` FOREIGN KEY (`idClient`) REFERENCES `Client` (`idClient`),
   CONSTRAINT `FKClientRese593027` FOREIGN KEY (`idWorkspace`) REFERENCES `Workspace` (`idWorkspace`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -84,12 +100,12 @@ CREATE TABLE `ClientReservation` (
 -- Records of ClientReservation
 -- ----------------------------
 BEGIN;
-INSERT INTO `ClientReservation` VALUES (1, 1, '2019-05-13', 5);
-INSERT INTO `ClientReservation` VALUES (1, 1, '2019-05-14', 5);
-INSERT INTO `ClientReservation` VALUES (1, 1, '2019-05-15', 1);
-INSERT INTO `ClientReservation` VALUES (2, 1, '2019-05-13', 1);
-INSERT INTO `ClientReservation` VALUES (2, 1, '2019-05-14', 3);
-INSERT INTO `ClientReservation` VALUES (2, 1, '2019-05-16', 10);
+INSERT INTO `ClientReservation` VALUES (1, 1, '2019-05-13', 5, 'Confirmed');
+INSERT INTO `ClientReservation` VALUES (1, 1, '2019-05-14', 5, 'Waiting');
+INSERT INTO `ClientReservation` VALUES (1, 1, '2019-05-15', 1, 'Canceled');
+INSERT INTO `ClientReservation` VALUES (2, 1, '2019-05-13', 1, 'Canceled');
+INSERT INTO `ClientReservation` VALUES (2, 1, '2019-05-14', 3, 'Waiting');
+INSERT INTO `ClientReservation` VALUES (2, 1, '2019-05-16', 10, 'Confirmed');
 COMMIT;
 
 -- ----------------------------
@@ -240,25 +256,6 @@ BEGIN;
 INSERT INTO `Subscription` VALUES (1, 1, '2019-05-13');
 INSERT INTO `Subscription` VALUES (1, 2, '2019-05-13');
 INSERT INTO `Subscription` VALUES (2, 2, '2019-05-15');
-COMMIT;
-
--- ----------------------------
--- Table structure for WorkSpace
--- ----------------------------
-DROP TABLE IF EXISTS `WorkSpace`;
-CREATE TABLE `WorkSpace` (
-  `IdWorkSpace` int(10) NOT NULL AUTO_INCREMENT,
-  `City` varchar(50) DEFAULT NULL,
-  `Capacity` int(10) DEFAULT NULL,
-  `Address` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IdWorkSpace`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of WorkSpace
--- ----------------------------
-BEGIN;
-INSERT INTO `WorkSpace` VALUES (1, 'Kenitra', 30, 'Center Ville St Lyote');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
