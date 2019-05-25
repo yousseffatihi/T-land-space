@@ -1,3 +1,8 @@
+<?php
+require_once('../controllers/clientController.php');
+session_start();
+if(!isset($_SESSION['user'])) header("Location: index.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,8 +80,17 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12"><a class="btn btn-primary btn-block" href="#">Apply</a></div>
+                  <div class="col-md-12"><a class="btn btn-primary btn-block" id="btnApply" href="#">Apply</a></div>
                 </div>
+				<?php
+				  if(isset($_GET['old']) && isset($_GET['new'])){
+					  $cc = new clientController();
+					  $_SESSION['user']->setPassword($_GET['new']);
+					  $res = $cc->update($_SESSION['user']);
+					  if($res == 1)
+						  echo "<script> alert('Password Changed'); </script>";
+				  }
+				?>
               </div>
             </div>
           </form>
@@ -125,6 +139,18 @@
   <script src="../libs/js/jquery.min.js"></script>
   <script src="../libs/js/popper.min.js"></script>
   <script src="../libs/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+  $('#btnApply').click(function(){
+    var oldP = document.getElementById('oldPassword').value;
+	var newP = document.getElementById('newPassword').value;
+	var confirmP = document.getElementById('confirmPassword').value;
+	if(newP == confirmP &&  oldP != confirmP){
+	window.location.href = "Password.php?old=" + oldP + "&new=" + confirmP;
+	}else{
+		alert("new password not match or new password equal to old password");
+	}
+  });
+  </script>
 </body>
 
 </html>
