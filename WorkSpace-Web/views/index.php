@@ -1,23 +1,89 @@
 <!DOCTYPE html>
+
+<?php
+require_once('../controllers/clientController.php');
+require_once('../controllers/clientreservationController.php');
+require_once('../controllers/administratorController.php');
+session_start();
+
+?>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>T Land Space</title>
-  <link rel="stylesheet" href="../libs/css/all.css" type="text/css">
+  <link rel="stylesheet" href="../libs/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
   <link href="../libs/css/datepicker.min.css" rel="stylesheet" type="text/css">
-  <link rel="icon" href="../libs/images/T@0,1x.png">
+  <style media="screen">
+    .heroscene{
+      background-image: url('../libs/images/workspace-collaboration.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 700px;
+    }
+
+    .bgclient {
+        width: 100px;
+        margin: auto;
+        height: 100px;
+        background-image: url('../libs/images/boy1.jpeg');
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .datepicker-inline .datepicker {
+      width: 300px;
+      height: 300px;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btnLogin {
+      color: white !important;
+    }
+
+    @media (max-width: 767px) {
+      .btnLogin{
+        width: 100%;
+      }
+      .btnRegister {
+        width: 100%;
+      }
+      .navForm{
+            display: block;
+      }
+      .navInput {
+            width: 100% !important;
+
+      }
+    }
+    @media (min-width: 766px) {
+      .btnLogin{
+        margin-left: 5px;
+      }
+      .btnRegister {
+margin-left: 5px;
+      }
+      .navInput {
+        margin-left: 5px;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-light">
-    <div class="container">
-      <a class="navbar-brand text-primary" href="./">
-        <img src="../libs/images/TLand@0,1x.png" width="100" alt="T Land Space">
-      </a>
-      <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
+    <div class="container"> <a class="navbar-brand text-primary" href="#">
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>
+        <b>BRAND</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar4">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar4">
@@ -27,42 +93,108 @@
           <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
           <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li> -->
         <form method="post" class="navForm form-inline my-2 my-lg-0">
-          <li class="nav-item navInput" style="margin-top:5px;" > <input class="form-control navInput inputsForm" style="margin:0;" type="Email" name="txtEmail" placeholder="Email@example.com"> </li>
-          <li class="nav-item  navInput" style="margin-top:5px;" > <input class="form-control navInput inputsForm" style="margin:0;" type="Password" name="txtPassword" placeholder="Password"> </li>
-          <li class="nav-item"style="margin-top:5px;"><button type="submit" class="btn btn-primary btnLogin" style="width: 100%;">Login</button></li>
+		  <?php if(!isset($_SESSION['isLogged'])){ ?>
+          <li class="nav-item navInput" style="margin-top:5px;" > <input class="form-control navInput" type="Email" name="txtEmail" placeholder="Email@example.com"> </li>
+          <li class="nav-item  navInput" style="margin-top:5px;" > <input class="form-control navInput" type="Password" name="txtPassword" placeholder="Password"> </li>
+          <li class="nav-item"style="margin-top:5px;"><button type="submit" class="btn btn-primary btnLogin" style="width: 100%;" name="logIn">Login</button></li>
           <li class="nav-item"style="margin-top:5px;"><a class="btn navbar-btn ml-md-2 btn-light btnRegister" href="./Register.php">Register</a></li>
+		  <?php }else if(isset($_SESSION['isLogged']) && $_SESSION['isLogged'] == true){ ?>
+		  <li class="nav-item navInput" style="margin-top:5px;" ><h4>Welcome 
+		  <?php 
+		  $prefix = $_SESSION['isAdmin'] ? "Admin : " : "Client : ";
+		  echo $prefix.' '.$_SESSION['user']->getLastName().' '.$_SESSION['user']->getFirstName();
+		  ?>
+		  
+		  </h4></li>
+		  <li class="nav-item  navInput" style="margin-top:5px;" ><button type="submit" class="btn btn-primary btnLogin" style="width: 100%;" name="logOut">Log Out</button></li>
+		  <?php } ?>
         </form>
+		<?php
+		    echo date("Y-m-d");
+		    if(isset($_POST['logIn'])){
+				$cc = new clientController();
+				$ac = new administratorController();
+				$clients = $cc->getAll();
+				$admins = $ac->getAll();
+					 foreach($clients as $client){
+						if($client->getEmail() == $_POST['txtEmail'] || 
+							$client->getPassword() == $_POST['txtPassword']){
+							        $_SESSION['user'] = new Client($client->getIdPerson(),$client->getFirstName(),$client->getLastName(),
+									                               $client->getBirthday(),$client->getEmail(),$client->getPassword(),$client->getAddress());
+									$_SESSION['isLogged'] = true;
+									$_SESSION['isAdmin'] = false;
+									break;
+							}
+					}
+					if(!isset($_SESSION['user'])){
+						foreach($admins as $admin){
+						if($admin->getEmail() == $_POST['txtEmail'] || 
+							$admin->getPassword() == $_POST['txtPassword']){
+							        $_SESSION['user'] = new Administrator($admin->getIdPerson(),$admin->getFirstName(),$admin->getLastName(),
+									                               $admin->getBirthday(),$admin->getEmail(),$admin->getPassword(),$admin->getAddress());
+									$_SESSION['isLogged'] = true;
+									$_SESSION['isAdmin'] = true;
+									break;
+							}
+					}
+					}
+				header("Location: index.php");
+			}
+			
+			if(isset($_POST['logOut'])){
+				session_destroy();
+                unset($_SESSION['isLogged']);
+				unset($_SESSION['user']);
+				unset($_SESSION['isAdmin']);
+				header("Location: index.php");
+			}
+		?>
         </ul>
       </div>
     </div>
   </nav>
   <!-- Hero Scene -->
-  <div class="">
-    <div class="container-fluid">
+  <div class="text-white">
       <div class="row">
-        <div class="col-md-6 heroscene">
-
+        <div class="col-lg-6 p-0 heroscene">
         </div>
-        <div class="py-5 col-md-6 justify-content-center d-flex flex-column">
+        <div class="p-5 col-lg-6 d-flex flex-column justify-content-center">
           <div class="container">
             <div class="row">
               <div class="datepicker-here" style="margin: auto;" id="my-element" data-date-format="dd-mm-yyyy" data-language='en'></div>
-          </div>
-          <div class="p-3 row">
-            <div class="col-md-12" style="text-align: center;">
-              <div class="btn-group">
-                <a id="btnMin" class="btn btn-primary" style="border-radius: 3px;">-</a>
-                <a id="btnValue" class="btn btn-disable" style="width: 100px; cursor: default; color: black;">1</a>
-                <a id="btnAdd" class="btn btn-primary" style="border-radius: 3px;">+</a>
+            </div>
+            <div class="p-3 row">
+              <div class="col-md-12" style="text-align: center;">
+                <div class="btn-group">
+                  <a id="btnMin" class="btn btn-primary" style="border-radius: 3px;">-</a>
+                  <a id="btnValue" class="btn btn-disable" style="width: 100px; cursor: default; color: black;">1</a>
+                  <a id="btnAdd" class="btn btn-primary" style="border-radius: 3px;">+</a>
+                </div>
               </div>
             </div>
+            <div class="row">
+              <a id="btnApply" class="btn btn-primary" style="width: 170px; margin: auto;" name="applyReservation">Apply</a>
+			  <p style="color:black;">
+			  <?php 
+              if(isset($_GET['numplace']) && isset($_GET['date'])){
+		           if(isset($_SESSION['user']) && !$_SESSION['isAdmin']){
+					   $cr = new clientresevationController();
+					   $workspace = new Workspace(1,"Kenitra","40","BLOC D N 210 OLD OUJIH");
+					   $cres = new client_reservation($_SESSION['user'],$workspace,$_GET['date'],$_GET['numplace'],"Pending");
+					   $res = $cr->add($cres);
+					   if($res == 1)
+						   echo "<br>Reservation successfuly";
+					   
+				   }
+	          }
+			
+          ?>
+		   </p>
+            </div>
           </div>
-          <div class="row">
-            <a id="btnApply" class="btn btn-primary" style="width: 170px; margin: auto;">Apply</a>
-          </div>
+		  
         </div>
       </div>
-    </div>
   </div>
   <!-- End Hero Scene -->
   <!-- Testimonials -->
@@ -111,7 +243,7 @@
       </div>
       <div class="row">
         <div class="col-md-4 p-3">
-          <div class="card cardPrice text-center text-dark">
+          <div class="card text-center text-dark">
             <div class="card-body p-4">
               <h3>Day</h3>
               <p class="my-3">Among the tall grass by the trickling stream.</p>
@@ -120,7 +252,7 @@
           </div>
         </div>
         <div class="col-md-4 p-3">
-          <div class="card cardPrice text-center text-dark">
+          <div class="card text-center text-dark">
             <div class="card-body p-4">
               <h3>Week</h3>
               <p class="my-3">I am alone, and feel the charm of existence in this spot.</p>
@@ -129,7 +261,7 @@
           </div>
         </div>
         <div class="col-md-4 p-3">
-          <div class="card cardPrice text-center text-dark">
+          <div class="card text-center text-dark">
             <div class="card-body p-4">
               <h3>Month</h3>
               <p class="my-3">The breath of that universal love which bears and sustains us.</p>
@@ -154,17 +286,17 @@
         <div class="p-0 order-2 order-md-1 col-lg-6">
           <iframe width="100%" height="350" src="https://maps.google.com/maps?hl=en&amp;q=New%20York&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" scrolling="no" frameborder="0"></iframe>
         </div>
-        <div class="p-4 order-1 order-md-2 col-lg-6">
+        <div class="px-4 order-1 order-md-2 col-lg-6">
           <h2 class="mb-4">A greater artist</h2>
           <form>
             <div class="form-group">
-              <input type="text" class="form-control inputsForm" id="form44" placeholder="Name">
+              <input type="text" class="form-control" id="form44" placeholder="Name">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control inputsForm" id="form45" placeholder="Email">
+              <input type="email" class="form-control" id="form45" placeholder="Email">
             </div>
             <div class="form-group">
-              <textarea class="form-control inputsForm" id="form46" rows="3" placeholder="Your message"></textarea>
+              <textarea class="form-control" id="form46" rows="3" placeholder="Your message"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">Send</button>
           </form>
@@ -219,6 +351,7 @@
   <script src="../libs/js/i18n/datepicker.en.js"></script>
   <script type="text/javascript">
   var dateReservation = "";
+  var nump = 1;
   // Initialization
   $('#my-element').datepicker({
       language: 'en',
@@ -244,6 +377,7 @@
         return;
       }
       document.getElementById('btnValue').innerText = num;
+	  nump = num;
     }
   });
 
@@ -256,17 +390,18 @@
         return;
       }
       document.getElementById('btnValue').innerText = num;
+	  nump = num;
     }
   });
 
   $('#btnApply').click(function(){
     if(dateReservation != ""){
-      alert(dateReservation);
+      dateReservation = dateReservation.split("-").reverse().join("-");
+	  window.location.href = "index.php?numplace=" + nump + "&date=" + dateReservation;
     } else {
       alert("Choose a date");
     }
   });
   </script>
 </body>
-
 </html>

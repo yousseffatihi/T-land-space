@@ -1,30 +1,24 @@
 <!DOCTYPE html>
+<?php 
+require_once('../controllers/clientController.php');
+session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T Land Space | Login</title>
+    <title>T Land Space</title>
     <link rel="stylesheet" type="text/css" href="../libs/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../libs/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="../libs/css/iofrm-style.css">
     <link rel="stylesheet" type="text/css" href="../libs/css/iofrm-theme3.css">
-    <link rel="icon" href="../libs/images/T@0,1x.png">
-  <style media="screen">
-      .website-logo img {
-        width: 300px;
-      }
-
-      .website-logo {
-          left: 150px;
-      }
-    </style>
 </head>
 <body>
     <div class="form-body" class="container-fluid">
         <div class="website-logo">
-            <a href="index.php">
-                <div class="">
-                    <img src="../libs/images/TLand@0,25x.png" class="logo-size" alt="T Land Space">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="../libs/images/logo-light.svg" alt="">
                 </div>
             </a>
         </div>
@@ -42,13 +36,43 @@
                             <a href="login.php" class="active">Login</a>
                             <a href="register.php">Register</a>
                         </div>
-                        <form>
+                        <form method="POST">
                             <input class="form-control" type="text" name="username" placeholder="E-mail Address" required>
                             <input class="form-control" type="password" name="password" placeholder="Password" required>
                             <div class="form-button">
-                                <button id="submit" type="submit" class="ibtn">Login</button>
+                                <button id="submit" type="submit" class="ibtn" name="login">Login</button>
                             </div>
                         </form>
+						<?php
+						  if(isset($_POST['login'])){
+							  $cc = new clientController();
+							  $ac = new administratorController();
+							  $clients = $cc->getAll();
+				              $admins = $ac->getAll();
+							  foreach($clients as $client){
+								  if($client->getEmail() == $_POST['username'] || 
+								     $client->getPassword() == $_POST['password']){
+										 $_SESSION['user'] = $client;
+										 $_SESSION['isLogged'] = true;
+										 $_SESSION['isAdmin'] = false;
+										 break;
+								  }
+							  }
+							  if(!isset($_SESSION['user'])){
+						         foreach($admins as $admin){
+						           if($admin->getEmail() == $_POST['txtEmail'] || 
+							          $admin->getPassword() == $_POST['txtPassword']){
+							              $_SESSION['user'] = new Administrator($admin->getIdPerson(),$admin->getFirstName(),$admin->getLastName(),
+									                               $admin->getBirthday(),$admin->getEmail(),$admin->getPassword(),$admin->getAddress());
+									      $_SESSION['isLogged'] = true;
+									      $_SESSION['isAdmin'] = true;
+									      break;
+							        }
+					              }
+							  print_r($_SESSION['user']);
+						  }
+						  
+						?>
                     </div>
                 </div>
             </div>
@@ -57,6 +81,5 @@
 <script type="text/javascript" src="../libs/js/jquery.min.js"></script>
 <script type="text/javascript" src="../libs/js/popper.min.js"></script>
 <script type="text/javascript" src="../libs/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../libs/js/main.js"></script>
 </body>
 </html>
