@@ -1,3 +1,8 @@
+<?php 
+require_once('../controllers/clientreservationController.php');
+session_start();
+if(!isset($_SESSION['user'])) header("Location: index.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,20 +55,28 @@
             </ul>
           </div>
           <div class="col-md-9">
-          <div class="card mb-4" style="text-align: center;">
+          <?php
+                $client = $_SESSION['user'];
+                $crc = new clientreservationController();
+                $allres = $crc->getById($client->getIdPerson());
+                foreach($allres as $res){
+	            $date = $res->getDateResevation();
+				$d = new DateTime($date); 
+           ?>
+           <div class="card mb-4" style="text-align: center;">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-4">
                   <h5 class="">09:30 AM</h5>
-                  <h5 class="" contenteditable="true">May 27, MON</h5>
+                  <h5 class="" contenteditable="false"><?php echo strtoupper($d->format('M').' '.$d->format('d').', '.$d->format('D')); ?></h5>
                 </div>
                 <div class="col-md-4">
-                  <h4 class="">4 Persons</h4>
+                  <h4 class=""><?php echo $res->getNumplace(); ?> Persons</h4>
                   <h5 class="">1 Day</h5>
                 </div>
                 <div class="col-md-4">
                   <h5 class="">06:00 PM</h5>
-                  <h5 class="">May 27, MON</h5>
+                  <h5 class=""><?php echo strtoupper($d->format('M').' '.$d->format('d').', '.$d->format('D')); ?></h5>
                 </div>
               </div>
               <div class="row">
@@ -75,81 +88,7 @@
               </div>
             </div>
           </div>
-          <div class="card mb-4" style="text-align: center;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <h5 class="">09:30 AM</h5>
-                  <h5 class="" contenteditable="true">May 27, MON</h5>
-                </div>
-                <div class="col-md-4">
-                  <h4 class="">4 Persons</h4>
-                  <h5 class="">1 Day</h5>
-                </div>
-                <div class="col-md-4">
-                  <h5 class="">06:00 PM</h5>
-                  <h5 class="">May 27, MON</h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                  <a class="btn  btn-success text-light btnPrice" href="#">60 DH</a>
-                </div>
-                <div class="col-md-4"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card mb-4" style="text-align: center;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <h5 class="">09:30 AM</h5>
-                  <h5 class="" contenteditable="true">May 27, MON</h5>
-                </div>
-                <div class="col-md-4">
-                  <h4 class="">4 Persons</h4>
-                  <h5 class="">1 Day</h5>
-                </div>
-                <div class="col-md-4">
-                  <h5 class="">06:00 PM</h5>
-                  <h5 class="">May 27, MON</h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                  <a class="btn  btn-success text-light btnPrice" href="#">60 DH</a>
-                </div>
-                <div class="col-md-4"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card mb-4" style="text-align: center;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <h5 class="">09:30 AM</h5>
-                  <h5 class="" contenteditable="true">May 27, MON</h5>
-                </div>
-                <div class="col-md-4">
-                  <h4 class="">4 Persons</h4>
-                  <h5 class="">1 Day</h5>
-                </div>
-                <div class="col-md-4">
-                  <h5 class="">06:00 PM</h5>
-                  <h5 class="">May 27, MON</h5>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                  <a class="btn  btn-success text-light btnPrice" href="#">60 DH</a>
-                </div>
-                <div class="col-md-4"></div>
-              </div>
-            </div>
-          </div>
+<?php } ?>
         </div>
         </div>
       </div>
