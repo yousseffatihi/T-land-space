@@ -15,11 +15,10 @@ class promotionController{
     $promos = array();
 	while ($data = mysqli_fetch_assoc($res)){
         $promos[] = new Promotion($data['idPromotion'],
-		                          $data['NameEvent'],
-		                          $data['TextEvent'],
+		                          $data['NamePromotion'],
+		                          $data['TextPromotion'],
 		                          $data['Image'],
 		                          $data['DatePost'],
-		                          $data['File'],
 								  $data['DatePromotion'],
 		                          $data['DateExpiration'],
 		                          $data['idAdministrator']);
@@ -40,7 +39,7 @@ class promotionController{
 	if(!$res) return null;
 	
 	$data = mysqli_fetch_row($res);
-	$promo = new Promotion($data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8]);
+	$promo = new Promotion($data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7]);
     return $promo;
   }
   
