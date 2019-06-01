@@ -1,32 +1,17 @@
 <?php
+require_once(realpath(dirname(__FILE__)) . '/Post.php');
+
 class Event extends Post{
     /* Member variables */
-    private $nameEvent;
     private $dateEvent;
     private $dateExpiration;
     
     /* Constructor */
-    public function __construct( $idPost, $text, $image, $datePost, $file, $nameEvent, $dateEvent, $dateExpiration){
-        parent::__construct($idPost,$text,$image,$datePost,$file);
+    public function __construct($idPost, $title, $text, $image, $datePost, $dateEvent, $dateExpiration,$admin){
+        parent::__construct($idPost,$title,$text,$image,$datePost,'',$admin);
         
-        $this->nameEvent = $nameEvent;
         $this->dateEvent = $dateEvent;
         $this->dateExpiration = $dateExpiration;
-    }
-    /**
-     * @return the $nameEvent
-     */
-    public function getNameEvent()
-    {
-        return $this->nameEvent;
-    }
-
-    /**
-     * @return the $dateEvent
-     */
-    public function getDateEvent()
-    {
-        return $this->dateEvent;
     }
 
     /**
@@ -36,6 +21,14 @@ class Event extends Post{
     {
         return $this->dateExpiration;
     }
+     
+	/**
+     * @param field_type $dateExpiration
+     */
+    public function setDateExpiration($dateExpiration)
+    {
+        $this->dateExpiration = $dateExpiration;
+    } 
 
     /**
      * @param field_type $nameEvent
@@ -52,17 +45,7 @@ class Event extends Post{
     {
         $this->dateEvent = $dateEvent;
     }
-
-    /**
-     * @param field_type $dateExpiration
-     */
-    public function setDateExpiration($dateExpiration)
-    {
-        $this->dateExpiration = $dateExpiration;
-    }
-
-    
-    
 }
+    
 
 ?>

@@ -1,26 +1,17 @@
 <?php
+require_once(realpath(dirname(__FILE__)) . '/Post.php');
 class Promotion extends Post{
     /* Member variables */
-    private $namePromotion;
     private $datePromotion;
     private $dateExpiration;
     
     /* Constructor */
-    public function __construct( $idPost, $text, $image, $datePost, $file, $namePromotion, $datePromotion, $dateExpiration){
-        parent::__construct($idPost,$text,$image,$datePost,$file);
+    public function __construct( $idPost, $title, $text, $image, $datePost, $datePromotion, $dateExpiration, $admin){
+        parent::__construct($idPost,$title,$text,$image,$datePost,'',$admin);
         
-        $this->namePromotion = $namePromotion;
         $this->datePromotion = $datePromotion;
         $this->dateExpiration = $dateExpiration;
     }
-    /**
-     * @return the $namePromotion
-     */
-    public function getNamePromotion()
-    {
-        return $this->namePromotion;
-    }
-
     /**
      * @return the $datePromotion
      */
@@ -35,14 +26,6 @@ class Promotion extends Post{
     public function getDateExpiration()
     {
         return $this->dateExpiration;
-    }
-
-    /**
-     * @param field_type $namePromotion
-     */
-    public function setNamePromotion($namePromotion)
-    {
-        $this->namePromotion = $namePromotion;
     }
 
     /**
