@@ -1,3 +1,9 @@
+<?php 
+require_once('../controllers/postController.php');
+require_once('../controllers/administratorController.php');
+require_once('../controllers/promotionController.php');
+require_once('../controllers/eventController.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,74 +40,73 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8">
+		  <?php
+			$pc = new postController();
+			$ac = new administratorController();
+			$ec = new eventController();
+			$promo = new promotionController();
+			
+			$posts = $pc->getAll();
+			foreach($posts as $post){
+			   $admin = $ac->getById($post->getAdmin());
+			   $date = $post->getDatePost();
+			   $d = new DateTime($date); 
+			   $img = "../libs/imguploaded/".$post->getImage();
+		  ?>
           <div class="card mb-4">
-            <img class="card-img-top" src="https://static.pingendo.com/cover-moon.svg" alt="Card image cap">
+            <img class="card-img-top" src=<?php echo $img; ?> alt="Card image cap">
             <div class="card-body">
-              <small>by <strong>Admin</strong> On May 12, 2017</small>
-              <h4 class="card-title mt-1">Card title</h4>
-              <p class="card-text postTitle">Some quick example text to build on the card title and make up the bulk of the card's content. safasdfsae sadfsakdfhjaskjdfhkasjdhfklajhsdfk ajksfghlkasjdfhlkjh</p> <a href="#" class="btn btn-primary">Go somewhere</a>
+              <small>by <strong>Admin</strong> On <?php echo $d->format('M').' '.$d->format('d').', '.$d->format('Y') ?></small>
+              <h4 class="card-title mt-1"><?php echo $post->getTitle(); ?></h4>
+              <p class="card-text postTitle">
+			  <?php 
+					  $textArray = explode(" ", $post->getText());
+					  echo implode(" ",array_slice($textArray, 0, 20)).'...'; ?>
+			  </p> <a href=<?php echo "post.php?postId=".$post->getIdPost(); ?> class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
-          <div class="card mb-4">
-            <img class="card-img-top" src="https://static.pingendo.com/cover-moon.svg" alt="Card image cap">
-            <div class="card-body">
-              <small>by <strong>Admin</strong> On May 12, 2017</small>
-              <h4 class="card-title mt-1">Card title</h4>
-              <p class="card-text postTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-          <div class="card mb-4">
-            <img class="card-img-top" src="https://static.pingendo.com/cover-moon.svg" alt="Card image cap">
-            <div class="card-body">
-              <small>by <strong>Admin</strong> On May 12, 2017</small>
-              <h4 class="card-title mt-1">Card title</h4>
-              <p class="card-text postTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p> <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
+			<?php } ?>
         </div>
         <div class="col-md-4">
-          <div class="card-body">
-            <h5 class="card-title"><b>Categories</b></h5>
-            <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Cras justo odio <span class="badge badge-primary badge-pill">14</span> </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Dapibus ac facilisis in <span class="badge badge-primary badge-pill">2</span> </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center"> Morbi leo risus <span class="badge badge-primary badge-pill">1</span> </li>
-            </ul>
-          </div>
+          <?php 
+			$post_count = sizeof($pc->getAll());
+			$promo_count = sizeof($promo->getAll());;
+			$event_count = sizeof($ec->getAll());
+			
+			
+			?>
+            <div class="card-body">
+              <h5 class="card-title"><b>Categories</b></h5>
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center"> Posts <span class="badge badge-primary badge-pill"><?php echo $post_count; ?></span> </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center"> Promotions <span class="badge badge-primary badge-pill"><?php echo $promo_count; ?></span> </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center"> Events <span class="badge badge-primary badge-pill"><?php echo $event_count; ?></span> </li>
+              </ul>
+            </div>
           <div class="card-body">
             <h5 class="card-title"><b>Recent Posts</b><br></h5>
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between datePost">
-                  <h5 class="mb-2 postTitle">Top 10 Things You Can Do In Summer!</h5>
-                </div>
-                <div class="row">
-                  <div class="col-md-4"><img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-1.svg"></div>
-                  <div class="col-md-8">
-                    <p class="recentPost">Paragraph. Then, my friend, when darkness overspreads my eyes, and heaven and earth seem to dwell in my soul and absorb its power, like the form of a beloved mistress, then I often think with longing.</p>
+              <?php 
+			     $recent = $pc->getAll();
+				 $count = sizeof($recent) <= 3 ? sizeof($recent) : 3;
+				 foreach($recent as $p){
+					if(!$count) break;
+				    $count--;
+			  ?>
+                <a href=<?php echo '?postId='.$p->getIdPost(); ?> class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between datePost">
+                    <h5 class="mb-2 postTitle"><?php echo $p->getTitle(); ?></h5>
                   </div>
-                </div>
-              </a><a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between datePost">
-                  <h5 class="mb-2 postTitle">Let's Read Some Books Together!</h5>
-                </div>
-                <div class="row">
-                  <div class="col-md-4"><img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-1.svg"></div>
-                  <div class="col-md-8">
-                    <p class="recentPost">Paragraph. Then, my friend, when darkness overspreads my eyes, and heaven and earth seem to dwell in my soul and absorb its power, like the form of a beloved mistress, then I often think with longing.</p>
+                  <div class="row">
+                    <div class="col-md-4"><img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-1.svg"></div>
+                    <div class="col-md-8">
+                      <p class="recentPost"><?php 
+					  $textArray = explode(" ", $p->getText());
+					  echo implode(" ",array_slice($textArray, 0, 10)).'...'; ?></p>
+                    </div>
                   </div>
-                </div>
-              </a><a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between datePost">
-                  <h5 class="mb-2 postTitle">Let's Watch Movies Together!</h5>
-                </div>
-                <div class="row">
-                  <div class="col-md-4"><img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-1.svg"></div>
-                  <div class="col-md-8">
-                    <p class="recentPost">Paragraph. Then, my friend, when darkness overspreads my eyes, and heaven and earth seem to dwell in my soul and absorb its power, like the form of a beloved mistress, then I often think with longing.</p>
-                  </div>
-                </div>
-              </a>
+                </a>
+				 <?php } ?>
             </div>
           </div>
         </div>
