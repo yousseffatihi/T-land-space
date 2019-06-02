@@ -69,7 +69,6 @@ session_start();
 									      break;
 							        }
 					              }
-							  print_r($_SESSION['user']);
 						  }
 						  
 						?>

@@ -1,9 +1,16 @@
+<?php
+require_once('../controllers/administratorController.php');
+require_once('../controllers/postController.php');
+require_once('../controllers/clientreservationController.php');
+session_start();
+if(!isset($_SESSION['user']) || !$_SESSION['isAdmin']) header("Location: index.php");
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>T Land Space | Profile</title>
+  <title>T Land Space | Dashboard</title>
   <link rel="stylesheet" href="../libs/css/all.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/theme.css" type="text/css">
   <link rel="stylesheet" href="../libs/css/custom.css" type="text/css">
@@ -34,11 +41,29 @@
   <div class="py-5">
     <div class="container">
       <div class="row">
+	    <?php
+		   $admin = $_SESSION['user'];
+		   $rc = new clientreservationController();
+		   $res = $rc->getAll();
+		   $dt = new DateTime();
+		   $confirmed = 0;
+		   $waiting = 0;
+		   $cancled = 0;
+		   
+		   
+		   foreach($res as $r){
+			  if($r->getDateReservation() == $dt->format('Y-m-d')){
+			   if($r->getStatus() == "Confirmed") $confirmed++;
+			   if($r->getStatus() == "Waiting") $waiting++;
+			   if($r->getStatus() == "Cancled") $cancled++;
+			  }
+		   }
+		?>
         <div class="col-md-4">
           <div class="row">
             <div class="col-md-4"><img class="img-fluid d-block rounded-circle" src="https://static.pingendo.com/img-placeholder-3.svg"></div>
             <div class="col-md-8">
-              <h1 class="" contenteditable="true">Salah El Badaoui</h1>
+              <h1 class="" contenteditable="true"><?php echo $admin->getLastName().' '.$admin->getFirstName(); ?></h1>
             </div>
           </div>
           <div class="row">
@@ -59,19 +84,19 @@
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12">
-              <h1 class="display-4">Today : 10-01-2019</h1>
+              <h1 class="display-4">Today : <?php echo $dt->format('d-m-Y'); ?></h1>
             </div>
             <div class="col-md-4">
               <h2 class="">Confirmed</h2>
-              <h2 class="">25</h2>
+              <h2 class=""><?php echo $confirmed; ?></h2>
             </div>
             <div class="col-md-4">
               <h2 class="">Waiting</h2>
-              <h2 class="">2</h2>
+              <h2 class=""><?php echo $waiting; ?></h2>
             </div>
             <div class="col-md-4">
               <h2 class="">Canceled</h2>
-              <h2 class="" contenteditable="true">10</h2>
+              <h2 class="" contenteditable="true"><?php echo $cancled; ?></h2>
             </div>
           </div>
         </div>
