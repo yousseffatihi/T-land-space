@@ -1,5 +1,7 @@
 <?php
 
+
+
 function getConnection(){
 $servername = "localhost";
 $username = "root";
@@ -11,7 +13,7 @@ $conn = mysqli_connect($servername, $username, $password);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-mysqli_select_db($conn,"tland");
+mysqli_select_db($conn,"tland2");
 return $conn;
 }
 

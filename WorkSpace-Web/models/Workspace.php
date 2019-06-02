@@ -1,14 +1,18 @@
 <?php
+require_once(realpath(dirname(__FILE__)) . '/org_reservation.php');
+require_once(realpath(dirname(__FILE__)) . '/client_reservation.php');
+
 class Workspace{
-    private $idWorkSpace;
+    private $idWorkspace;
     private $city;
     private $capacity;
     private $address;
-    private $reservation = array();
+    private $org_reservation = array();
+	private $client_reservation = array();
     
     /* Constructor */
-    public function __construct( $idWorkSpace, $city, $capacity, $address){
-        $this->idWorkSpace = $idWorkSpace;
+    public function __construct( $idWorkspace, $city, $capacity, $address){
+        $this->idWorkspace = $idWorkspace;
         $this->city = $city;
         $this->capacity = $capacity;
         $this->address = $address;
@@ -17,9 +21,9 @@ class Workspace{
     /**
      * @return the $idWorkSpace
      */
-    public function getIdWorkSpace()
+    public function getIdWorkspace()
     {
-        return $this->idWorkSpace;
+        return $this->idWorkspace;
     }
 
     /**

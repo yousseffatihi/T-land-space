@@ -1,29 +1,29 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Client.php');
+require_once(realpath(dirname(__FILE__)) . '/Organisation.php');
 require_once(realpath(dirname(__FILE__)) . '/Workspace.php');
 
-class client_reservation{
+class org_reservation{
     /* Member variables */
-	private $client;
+    private $org;
 	private $workspace;
-	private $dateReservation;
+    private $dateResevation;
 	private $numplace;
 	private $status;
 	
     /* Constructor */
-    public function __construct($client, $workspace, $dateReservation, $numplace, $status){
-        $this->dateReservation = $dateReservation;
-		$this->client = $client;
+    public function __construct($dateResevation, $org, $workspace, $numplace, $status){
+        $this->dateResevation = $dateResevation;
+		$this->org = $org;
 		$this->workspace = $workspace;
 		$this->numplace = $numplace;
 		$this->status = $status;
     }
     /**
-     * @return the $client
+     * @return the $org
      */
-    public function getClient()
+    public function getOrg()
     {
-        return $this->client;
+        return $this->org;
     }
 
     /**
@@ -37,9 +37,9 @@ class client_reservation{
     /**
      * @return the $dateResevation
      */
-    public function getDateReservation()
+    public function getDateResevation()
     {
-        return $this->dateReservation;
+        return $this->dateResevation;
     }
 
     /**
@@ -59,11 +59,11 @@ class client_reservation{
     }
 
     /**
-     * @param field_type $client
+     * @param field_type $org
      */
-    public function setClient($client)
+    public function setOrg($org)
     {
-        $this->client = $client;
+        $this->org = $org;
     }
 
     /**

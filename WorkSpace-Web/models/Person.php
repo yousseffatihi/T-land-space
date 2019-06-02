@@ -11,7 +11,6 @@ class Person {
     
     /* Constructor */
     public function __construct( $idPerson, $firstName, $lastName, $birthday, $email, $password, $address){
-        
         $this->idPerson = $idPerson;
         $this->firstName = $firstName;
         $this->lastName = $lastName;

@@ -2,17 +2,21 @@
 class Post{
     /* Member variables */
     private $idPost;
+	private $title;
     private $text;
     private $image;
     private $datePost;
     private $file;
+	private $admin;
     
-    public function __construct( $idPost, $text, $image, $datePost, $file){
+    public function __construct( $idPost, $title, $text, $image, $datePost, $file, $admin){
         $this->idPost = $idPost;
+		$this->title = $title;
         $this->text = $text;
         $this->image = $image;
         $this->datePost = $datePost;
         $this->file = $file;
+		$this->admin = $admin;
     }
     
     /**
@@ -22,7 +26,15 @@ class Post{
     {
         return $this->idPost;
     }
-
+    
+	public function getAdmin()
+    {
+        return $this->admin;
+    }
+	public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+    }
     /**
      * @return the $text
      */
@@ -54,7 +66,13 @@ class Post{
     {
         return $this->file;
     }
-
+    /**
+     * @param field_type $file
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
     /**
      * @param field_type $idPost
      */
@@ -94,6 +112,16 @@ class Post{
     {
         $this->file = $file;
     }
+	
+	/**
+     * @param field_type $datePost
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    
 
      
 }

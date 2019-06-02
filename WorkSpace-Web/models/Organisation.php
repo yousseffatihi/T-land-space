@@ -1,6 +1,7 @@
 <?php
 class Organisation{
     /* Member variables */
+	private $Id;
     private $nameOrganisation;
     private $responsible;
     private $email;
@@ -8,12 +9,23 @@ class Organisation{
     private $dateOrganisation;
     
     /* Constructor */
-    public function __construct( $nameOrganisation, $responsible, $email, $password, $dateOrganisation){
-        $this->nameOrganisation = $nameOrganisation;
+    public function __construct($Id, $nameOrganisation, $responsible, $email, $password, $dateOrganisation){
+        $this->Id = $Id;
+		$this->nameOrganisation = $nameOrganisation;
         $this->responsible = $responsible;
         $this->email = $email;
         $this->password = $password;
         $this->dateOrganisation = $dateOrganisation;
+    }
+	
+	public function getId()
+    {
+        return $this->Id;
+    }
+	
+	public function setId($id)
+    {
+        $this->Id = $id;
     }
     /**
      * @return the $nameOrganisation
