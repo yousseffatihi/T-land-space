@@ -19,7 +19,6 @@ class eventController{
 		                      $data['TextEvent'],
 		                      $data['Image'],
 		                      $data['DatePost'],
-		                      $data['File'],
 							  $data['DateEvent'],
 		                      $data['DateExpiration'],
 		                      $data['idAdministrator']);
@@ -40,7 +39,7 @@ class eventController{
 	if(!$res) return null;
 	
 	$data = mysqli_fetch_row($res);
-	$event = new Event($data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8]);
+	$event = new Event($data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7]);
     return $event;
   }
   

@@ -1,7 +1,8 @@
 <?php
+require_once('../models/config.php');
 require_once('../models/client_reservation.php');
 
-class clientresevationController{
+class clientreservationController{
   /* FUNCTION CAN GET ALL CLIENT-RESERVATION FROM BDD THEN HE RETURN ARRAY OF RES */
   public function getAll(){
     $res = execQuery("SELECT * from client_reservation");
@@ -24,8 +25,10 @@ class clientresevationController{
 	/* TEST IF TABLE EXIST */
 	if(!$res) return null;
 	
-	$data = mysqli_fetch_row($res);
-	$cres = new client_reservation($data[0],$data[1],$data[2],$data[3],$data[4]);
+	$cres = array();
+	while($data = mysqli_fetch_array($res)){
+	$cres[] = new client_reservation($data[0],$data[1],$data[2],$data[3],$data[4]);
+	}
     return $cres;
   }
   
@@ -50,7 +53,7 @@ class clientresevationController{
 	  "','"
 	  .$cres->getWorkspace()->getIdWorkspace().
 	  "','"
-	  .$cres->getDateResevation().
+	  .$cres->getDateReservation().
 	  "','"
 	  .$cres->getNumplace().
 	  "','"
